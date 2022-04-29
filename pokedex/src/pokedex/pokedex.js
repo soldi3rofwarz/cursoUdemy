@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios'
 import { API_IMG, API_URL } from '../api/data';
+import { CircularProgress } from '@mui/material';
 
 const Pokedex = () => {
     const [pokedata, setpokedata] = useState([])
@@ -28,7 +29,7 @@ const Pokedex = () => {
         <Box>
             {pokedata? pokedata.map((poke)=>{
                 return <h2>{poke.name}</h2>
-            }): "nada chatel"}
+            }): <CircularProgress style={{marginTop: "100px"}}/>}
         </Box>
     );
 }
