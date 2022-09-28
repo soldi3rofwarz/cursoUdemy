@@ -2,12 +2,23 @@ import React,{useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios'
 import { API_IMG, API_URL } from '../api/data';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Grid } from '@mui/material';
+import PokeCart from '../componentes/pokeCart';
+import { makeStyles } from '@mui/styles';
+
+const useStyle= makeStyles((theme)=>({
+    pokedexcontainer:{
+        textAlign:'center',
+        padding:'80px 10px 0 10px'
+    }
+}))
+
 
 const Pokedex = () => {
+    const classes= useStyle();
     const [pokedata, setpokedata] = useState([])
     useEffect(() => {
-       axios.get(API_URL+"?limit=800").then((response)=>{
+    axios.get(API_URL+"?limit=800").then((response)=>{
             if(response.status >= 200 && response.status<300){
             const {results} = response.data
             
@@ -27,9 +38,12 @@ const Pokedex = () => {
     }, [])
     return ( 
         <Box>
-            {pokedata? pokedata.map((poke)=>{
-                return <h2>{poke.name}</h2>
-            }): <CircularProgress style={{marginTop: "100px"}}/>}
+            {pokedata? 
+            <Grid container spacing={2} className={classes.pokedexcontainer}>
+                {pokedata.map((poke)=>{
+                return <PokeCart pokemon={poke} image={poke.url} key={poke.id}/>
+            })}
+            </Grid>: <CircularProgress style={{marginTop: "100px"}}/>}
         </Box>
     );
 }
