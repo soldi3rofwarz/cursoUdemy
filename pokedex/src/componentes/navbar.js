@@ -10,8 +10,8 @@ import './navbar.css'
 import { makeStyles } from '@mui/styles';
 
 const useStyle= makeStyles((theme)=>({
-    AppBar:{
-        background:'#A1EB82',
+    toolBar:{
+        background:'#6FE089',
     },
     title:{
         cursor:'pointer',
@@ -24,8 +24,8 @@ const NavBar = (props) => {
     const classes = useStyle()
     return ( 
         <Box sx={{ flexGrow: 1 }} className='box'>
-            <AppBar  className='appbar' position='fixed'>
-                <Toolbar variant="dense"> 
+            <AppBar  position='fixed'>
+                <Toolbar className={classes.toolBar} variant="dense"> 
                     <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
                         <MenuIcon />
                     </IconButton>
